@@ -66,9 +66,10 @@
         <section id="words" class="panel">
             <div class="controls-area">
                 <input type="text" id="word-search" class="search-input" placeholder="搜索单词...">
-                <select id="word-category" class="filter-select">
-                    <option value="all">全部分类</option>
-                </select>
+                <div class="custom-select" id="word-category" data-value="all">
+                    <div class="custom-select-trigger">全部分类</div>
+                    <div class="custom-select-options"></div>
+                </div>
             </div>
             <div id="words-container" class="list-container">
                 <!-- Generated via JS -->
@@ -82,9 +83,10 @@
         <section id="sentences" class="panel">
             <div class="controls-area">
                 <input type="text" id="sentence-search" class="search-input" placeholder="搜索句子...">
-                <select id="sentence-category" class="filter-select">
-                    <option value="all">全部分类</option>
-                </select>
+                <div class="custom-select" id="sentence-category" data-value="all">
+                    <div class="custom-select-trigger">全部分类</div>
+                    <div class="custom-select-options"></div>
+                </div>
             </div>
             <div id="sentences-container" class="sentence-list-container">
                 <!-- Generated via JS -->

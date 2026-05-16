@@ -24,23 +24,40 @@ export class WordManager {
     }
 
     renderFilters() {
-        const categorySelect = document.getElementById('word-category');
-        if (!categorySelect) return;
+        const selectEl = document.getElementById('word-category');
+        if (!selectEl) return;
 
         const categories = ['all', ...new Set(this.allWords.map(w => w.category))];
-        categorySelect.innerHTML = '';
+        const optionsContainer = selectEl.querySelector('.custom-select-options');
+        const trigger = selectEl.querySelector('.custom-select-trigger');
+        optionsContainer.innerHTML = '';
+
         categories.forEach(cat => {
-            const opt = document.createElement('option');
-            opt.value = cat;
+            const opt = document.createElement('div');
+            opt.className = 'custom-select-option' + (cat === this.currentCategory ? ' selected' : '');
+            opt.dataset.value = cat;
             opt.innerText = cat === 'all' ? '全部分类' : cat;
-            categorySelect.appendChild(opt);
+            opt.addEventListener('click', () => {
+                this.currentCategory = cat;
+                selectEl.dataset.value = cat;
+                trigger.innerText = cat === 'all' ? '全部分类' : cat;
+                selectEl.classList.remove('open');
+                optionsContainer.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+                this.currentPage = 1;
+                this.applyFilters();
+            });
+            optionsContainer.appendChild(opt);
         });
 
-        categorySelect.onchange = (e) => {
-            this.currentCategory = e.target.value;
-            this.currentPage = 1;
-            this.applyFilters();
-        };
+        // Toggle dropdown
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelectorAll('.custom-select.open').forEach(el => {
+                if (el !== selectEl) el.classList.remove('open');
+            });
+            selectEl.classList.toggle('open');
+        });
 
         const searchInput = document.getElementById('word-search');
         if (searchInput) {

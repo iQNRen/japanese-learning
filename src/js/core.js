@@ -85,6 +85,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         }
 
+        // Close custom selects when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.custom-select.open').forEach(el => {
+                el.classList.remove('open');
+            });
+        });
+
     } catch (error) {
         console.error("CRITICAL ERROR during initialization:", error);
         alert("An error occurred while starting the application. Please check the console (F12) for details.");
