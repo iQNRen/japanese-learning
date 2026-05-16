@@ -27,20 +27,27 @@ export class WordManager {
         const selectEl = document.getElementById('word-category');
         if (!selectEl) return;
 
-        const categories = ['all', ...new Set(this.allWords.map(w => w.category))];
+        const categories = [...new Set(this.allWords.map(w => w.category))];
         const optionsContainer = selectEl.querySelector('.custom-select-options');
         const trigger = selectEl.querySelector('.custom-select-trigger');
         optionsContainer.innerHTML = '';
+
+        // Default to first category
+        if (!categories.includes(this.currentCategory)) {
+            this.currentCategory = categories[0] || 'all';
+        }
+        trigger.querySelector('.select-text').innerText = this.currentCategory;
+        selectEl.dataset.value = this.currentCategory;
 
         categories.forEach(cat => {
             const opt = document.createElement('div');
             opt.className = 'custom-select-option' + (cat === this.currentCategory ? ' selected' : '');
             opt.dataset.value = cat;
-            opt.innerText = cat === 'all' ? '全部分类' : cat;
+            opt.innerText = cat;
             opt.addEventListener('click', () => {
                 this.currentCategory = cat;
                 selectEl.dataset.value = cat;
-                trigger.querySelector('.select-text').innerText = cat === 'all' ? '全部分类' : cat;
+                trigger.querySelector('.select-text').innerText = cat;
                 selectEl.classList.remove('open');
                 optionsContainer.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
                 opt.classList.add('selected');
@@ -71,11 +78,11 @@ export class WordManager {
 
     applyFilters() {
         this.filteredWords = this.allWords.filter(w => {
-            const matchesSearch = w.jp.includes(this.currentSearch) || 
-                                w.kana.includes(this.currentSearch) || 
-                                w.en.toLowerCase().includes(this.currentSearch) || 
+            const matchesSearch = w.jp.includes(this.currentSearch) ||
+                                w.kana.includes(this.currentSearch) ||
+                                w.en.toLowerCase().includes(this.currentSearch) ||
                                 w.cn.includes(this.currentSearch);
-            const matchesCat = this.currentCategory === 'all' || w.category === this.currentCategory;
+            const matchesCat = w.category === this.currentCategory;
             return matchesSearch && matchesCat;
         });
         this.currentPage = 1;

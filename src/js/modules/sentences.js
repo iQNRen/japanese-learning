@@ -26,20 +26,27 @@ export class SentenceManager {
         const selectEl = document.getElementById('sentence-category');
         if (!selectEl) return;
 
-        const categories = ['all', ...new Set(this.allSentences.map(s => s.category))];
+        const categories = [...new Set(this.allSentences.map(s => s.category))];
         const optionsContainer = selectEl.querySelector('.custom-select-options');
         const trigger = selectEl.querySelector('.custom-select-trigger');
         optionsContainer.innerHTML = '';
+
+        // Default to first category
+        if (!categories.includes(this.currentCategory)) {
+            this.currentCategory = categories[0] || 'all';
+        }
+        trigger.querySelector('.select-text').innerText = this.currentCategory;
+        selectEl.dataset.value = this.currentCategory;
 
         categories.forEach(cat => {
             const opt = document.createElement('div');
             opt.className = 'custom-select-option' + (cat === this.currentCategory ? ' selected' : '');
             opt.dataset.value = cat;
-            opt.innerText = cat === 'all' ? '全部分类' : cat;
+            opt.innerText = cat;
             opt.addEventListener('click', () => {
                 this.currentCategory = cat;
                 selectEl.dataset.value = cat;
-                trigger.querySelector('.select-text').innerText = cat === 'all' ? '全部分类' : cat;
+                trigger.querySelector('.select-text').innerText = cat;
                 selectEl.classList.remove('open');
                 optionsContainer.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
                 opt.classList.add('selected');
@@ -70,11 +77,11 @@ export class SentenceManager {
 
     applyFilters() {
         this.filteredSentences = this.allSentences.filter(s => {
-            const matchesSearch = s.jp.includes(this.currentSearch) || 
-                                s.kana.includes(this.currentSearch) || 
-                                s.en.toLowerCase().includes(this.currentSearch) || 
+            const matchesSearch = s.jp.includes(this.currentSearch) ||
+                                s.kana.includes(this.currentSearch) ||
+                                s.en.toLowerCase().includes(this.currentSearch) ||
                                 s.cn.includes(this.currentSearch);
-            const matchesCat = this.currentCategory === 'all' || s.category === this.currentCategory;
+            const matchesCat = s.category === this.currentCategory;
             return matchesSearch && matchesCat;
         });
         this.currentPage = 1;
