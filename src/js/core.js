@@ -15,6 +15,38 @@ const state = {
     speech: null
 };
 
+// Storage helpers
+const storage = {
+    _get(key, fallback) {
+        try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+        catch { return fallback; }
+    },
+    _set(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
+
+    getFavorites() { return new Set(this._get('nihongo_favs', [])); },
+    toggleFavorite(jp) {
+        const favs = this.getFavorites();
+        favs.has(jp) ? favs.delete(jp) : favs.add(jp);
+        this._set('nihongo_favs', [...favs]);
+        return favs.has(jp);
+    },
+    isFavorite(jp) { return this.getFavorites().has(jp); },
+
+    getWrongAnswers() { return this._get('nihongo_wrong', []); },
+    addWrongAnswer(item) {
+        const wrong = this.getWrongAnswers();
+        wrong.push({ ...item, date: Date.now() });
+        if (wrong.length > 200) wrong.splice(0, wrong.length - 200);
+        this._set('nihongo_wrong', wrong);
+    },
+    clearWrongAnswers() { this._set('nihongo_wrong', []); },
+
+    getDarkMode() { return localStorage.getItem('nihongo_dark') === 'true'; },
+    setDarkMode(v) { localStorage.setItem('nihongo_dark', v); }
+};
+
+window.storage = storage;
+
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("Initializing application...");
@@ -52,6 +84,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Preload data for quiz
         wordManager.loadData();
+
+        // Dark mode
+        if (storage.getDarkMode()) document.body.classList.add('dark');
+        const darkToggle = document.getElementById('dark-toggle');
+        if (darkToggle) {
+            darkToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                storage.setDarkMode(document.body.classList.contains('dark'));
+            });
+        }
 
         // Initial Render
         console.log("Performing initial render...");

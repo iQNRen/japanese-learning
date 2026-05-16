@@ -19,6 +19,7 @@ export class QuizManager {
         this.selectedMode = null;
         document.getElementById('quiz-start-area').style.display = 'none';
         document.querySelectorAll('.quiz-mode-card').forEach(c => c.classList.remove('selected'));
+        this._renderWrongBook();
     }
 
     selectMode(mode) {
@@ -168,12 +169,14 @@ export class QuizManager {
             });
         }
 
-        this.answers.push({
+        const answerData = {
             q: this.questions[this.currentIndex].q,
             a: correct,
             selected,
             correct: isCorrect
-        });
+        };
+        this.answers.push(answerData);
+        if (!isCorrect) window.storage.addWrongAnswer(answerData);
 
         setTimeout(() => {
             this.currentIndex++;
@@ -198,12 +201,9 @@ export class QuizManager {
             hint.innerHTML = `<span style="color:var(--beni-aka)">正确答案: ${q.a}</span>`;
         }
 
-        this.answers.push({
-            q: q.q,
-            a: q.a,
-            selected,
-            correct: isCorrect
-        });
+        const answerData = { q: q.q, a: q.a, selected, correct: isCorrect };
+        this.answers.push(answerData);
+        if (!isCorrect) window.storage.addWrongAnswer(answerData);
 
         setTimeout(() => {
             input.style.borderColor = '';
@@ -256,6 +256,36 @@ export class QuizManager {
 
     retryQuiz() {
         this.startSelected();
+    }
+
+    _renderWrongBook() {
+        const listEl = document.getElementById('wrong-book-list');
+        if (!listEl) return;
+        const wrongs = window.storage.getWrongAnswers();
+        if (wrongs.length === 0) {
+            listEl.innerHTML = '<div class="wrong-book-empty">暂无错题，继续加油！</div>';
+            return;
+        }
+        listEl.innerHTML = '';
+        // Show latest 20, reversed
+        const recent = wrongs.slice(-20).reverse();
+        recent.forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'result-review-item review-wrong';
+            el.innerHTML = `
+                <span class="review-emoji">✗</span>
+                <span class="review-text">
+                    <span class="review-q">${item.q}</span>
+                    <span class="review-a"> → 你的答案: ${item.selected} (正确: ${item.a})</span>
+                </span>
+            `;
+            listEl.appendChild(el);
+        });
+    }
+
+    clearWrongAnswers() {
+        window.storage.clearWrongAnswers();
+        this._renderWrongBook();
     }
 
     exitQuiz() {

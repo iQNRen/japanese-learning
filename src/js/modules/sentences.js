@@ -26,7 +26,7 @@ export class SentenceManager {
         const selectEl = document.getElementById('sentence-category');
         if (!selectEl) return;
 
-        const categories = [...new Set(this.allSentences.map(s => s.category))];
+        const categories = ['★ 已收藏', ...new Set(this.allSentences.map(s => s.category))];
         const optionsContainer = selectEl.querySelector('.custom-select-options');
         const trigger = selectEl.querySelector('.custom-select-trigger');
         const resetBtn = selectEl.querySelector('.select-reset');
@@ -103,7 +103,12 @@ export class SentenceManager {
                                 s.kana.includes(this.currentSearch) ||
                                 s.en.toLowerCase().includes(this.currentSearch) ||
                                 s.cn.includes(this.currentSearch);
-            const matchesCat = !this.currentCategory || s.category === this.currentCategory;
+            let matchesCat = true;
+            if (this.currentCategory === '★ 已收藏') {
+                matchesCat = window.storage.isFavorite(s.jp);
+            } else if (this.currentCategory) {
+                matchesCat = s.category === this.currentCategory;
+            }
             return matchesSearch && matchesCat;
         });
         this.currentPage = 1;
@@ -127,6 +132,7 @@ export class SentenceManager {
         pageItems.forEach(s => {
             const item = document.createElement('div');
             item.className = 'sentence-item';
+            const isFav = window.storage.isFavorite(s.jp);
             item.innerHTML = `
                 <span class="item-audio" onclick="window.speechEngine.speak('${s.jp}')">🔊</span>
                 <div style="flex:1; min-width:0;">
@@ -134,8 +140,17 @@ export class SentenceManager {
                     <div class="item-sub">${s.kana} · ${s.en}</div>
                     <div class="item-sub" style="color: var(--text); font-weight:500;">${s.cn}</div>
                 </div>
-                <span class="item-tag" style="font-size:0.75rem; padding:2px 8px; background:var(--accent2); border-radius:4px; color:white; flex-shrink:0;">${s.level || 'N5'}</span>
+                <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+                    <button class="fav-btn ${isFav ? 'active' : ''}" data-jp="${s.jp}" title="收藏">${isFav ? '★' : '☆'}</button>
+                    <span class="item-tag" style="font-size:0.75rem; padding:2px 8px; background:var(--accent2); border-radius:4px; color:white;">${s.level || 'N5'}</span>
+                </div>
             `;
+            item.querySelector('.fav-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const nowFav = window.storage.toggleFavorite(s.jp);
+                e.target.innerText = nowFav ? '★' : '☆';
+                e.target.classList.toggle('active', nowFav);
+            });
             container.appendChild(item);
         });
 

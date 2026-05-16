@@ -33,13 +33,12 @@ export class WordManager {
         const selectEl = document.getElementById('word-category');
         if (!selectEl) return;
 
-        const categories = [...new Set(this.allWords.map(w => w.category))];
+        const categories = ['★ 已收藏', ...new Set(this.allWords.map(w => w.category))];
         const optionsContainer = selectEl.querySelector('.custom-select-options');
         const trigger = selectEl.querySelector('.custom-select-trigger');
         const resetBtn = selectEl.querySelector('.select-reset');
         optionsContainer.innerHTML = '';
 
-        // Update trigger display
         const updateTrigger = () => {
             const textEl = trigger.querySelector('.select-text');
             if (this.currentCategory) {
@@ -110,7 +109,12 @@ export class WordManager {
                                 w.kana.includes(this.currentSearch) ||
                                 w.en.toLowerCase().includes(this.currentSearch) ||
                                 w.cn.includes(this.currentSearch);
-            const matchesCat = !this.currentCategory || w.category === this.currentCategory;
+            let matchesCat = true;
+            if (this.currentCategory === '★ 已收藏') {
+                matchesCat = window.storage.isFavorite(w.jp);
+            } else if (this.currentCategory) {
+                matchesCat = w.category === this.currentCategory;
+            }
             return matchesSearch && matchesCat;
         });
         this.currentPage = 1;
@@ -134,15 +138,25 @@ export class WordManager {
         pageItems.forEach(w => {
             const item = document.createElement('div');
             item.className = 'word-card';
+            const isFav = window.storage.isFavorite(w.jp);
             item.innerHTML = `
                 <div class="word-card-header">
                     <span class="item-main">${w.jp}</span>
-                    <span class="item-audio" onclick="event.stopPropagation(); window.speechEngine.speak('${w.jp}')">🔊</span>
+                    <div style="display:flex; align-items:center; gap:4px;">
+                        <button class="fav-btn ${isFav ? 'active' : ''}" data-jp="${w.jp}" title="收藏">${isFav ? '★' : '☆'}</button>
+                        <span class="item-audio" onclick="event.stopPropagation(); window.speechEngine.speak('${w.jp}')">🔊</span>
+                    </div>
                 </div>
                 <span class="item-sub">${w.kana}</span>
                 <span class="item-desc">${w.cn} · ${w.en}</span>
                 <span class="item-tag" data-level="${w.level || 'N5'}">${w.level || 'N5'}</span>
             `;
+            item.querySelector('.fav-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const nowFav = window.storage.toggleFavorite(w.jp);
+                e.target.innerText = nowFav ? '★' : '☆';
+                e.target.classList.toggle('active', nowFav);
+            });
             item.addEventListener('click', () => window.speechEngine.speak(w.jp));
             container.appendChild(item);
         });
