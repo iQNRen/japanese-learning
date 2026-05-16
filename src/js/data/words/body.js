@@ -1,0 +1,72 @@
+export default [
+    // --- Head / 頭 ---
+    {jp: '頭', kana: 'あたま', en: 'head', cn: '头', level: 'N5', category: '身体'},
+    {jp: '顔', kana: 'かお', en: 'face', cn: '脸', level: 'N5', category: '身体'},
+    {jp: '目', kana: 'め', en: 'eye', cn: '眼睛', level: 'N5', category: '身体'},
+    {jp: '耳', kana: 'みみ', en: 'ear', cn: '耳朵', level: 'N5', category: '身体'},
+    {jp: '鼻', kana: 'はな', en: 'nose', cn: '鼻子', level: 'N5', category: '身体'},
+    {jp: '口', kana: 'くち', en: 'mouth', cn: '嘴', level: 'N5', category: '身体'},
+    {jp: '歯', kana: 'は', en: 'tooth', cn: '牙齿', level: 'N5', category: '身体'},
+    {jp: '髪', kana: 'かみ', en: 'hair', cn: '头发', level: 'N5', category: '身体'},
+    {jp: '首', kana: 'くび', en: 'neck', cn: '脖子', level: 'N4', category: '身体'},
+    {jp: '舌', kana: 'した', en: 'tongue', cn: '舌头', level: 'N4', category: '身体'},
+    {jp: '唇', kana: 'くちびる', en: 'lip', cn: '嘴唇', level: 'N4', category: '身体'},
+    {jp: '眉', kana: 'まゆ', en: 'eyebrow', cn: '眉毛', level: 'N4', category: '身体'},
+    {jp: '額', kana: 'ひたい', en: 'forehead', cn: '额头', level: 'N4', category: '身体'},
+    {jp: '顎', kana: 'あご', en: 'chin / jaw', cn: '下巴', level: 'N4', category: '身体'},
+    {jp: '頬', kana: 'ほお', en: 'cheek', cn: '脸颊', level: 'N4', category: '身体'},
+
+    // --- Upper body / 上半身 ---
+    {jp: '手', kana: 'て', en: 'hand', cn: '手', level: 'N5', category: '身体'},
+    {jp: '腕', kana: 'うで', en: 'arm', cn: '手臂', level: 'N5', category: '身体'},
+    {jp: '指', kana: 'ゆび', en: 'finger', cn: '手指', level: 'N5', category: '身体'},
+    {jp: '背中', kana: 'せなか', en: 'back', cn: '后背', level: 'N5', category: '身体'},
+    {jp: 'お腹', kana: 'おなか', en: 'stomach', cn: '肚子', level: 'N5', category: '身体'},
+    {jp: '肩', kana: 'かた', en: 'shoulder', cn: '肩膀', level: 'N4', category: '身体'},
+    {jp: '爪', kana: 'つめ', en: 'nail', cn: '指甲', level: 'N4', category: '身体'},
+    {jp: '胸', kana: 'むね', en: 'chest', cn: '胸部', level: 'N4', category: '身体'},
+    {jp: '肘', kana: 'ひじ', en: 'elbow', cn: '肘', level: 'N4', category: '身体'},
+    {jp: '手首', kana: 'てくび', en: 'wrist', cn: '手腕', level: 'N4', category: '身体'},
+    {jp: '手のひら', kana: 'てのひら', en: 'palm', cn: '手掌', level: 'N4', category: '身体'},
+    {jp: '乳首', kana: 'ちくび', en: 'nipple', cn: '乳头', level: 'N4', category: '身体'},
+    {jp: '脇', kana: 'わき', en: 'armpit', cn: '腋下', level: 'N4', category: '身体'},
+
+    // --- Lower body / 下半身 ---
+    {jp: '足', kana: 'あし', en: 'foot / leg', cn: '脚', level: 'N5', category: '身体'},
+    {jp: '膝', kana: 'ひざ', en: 'knee', cn: '膝盖', level: 'N4', category: '身体'},
+    {jp: '踝', kana: 'くるぶし', en: 'ankle', cn: '脚踝', level: 'N4', category: '身体'},
+    {jp: 'かかと', kana: 'かかと', en: 'heel', cn: '脚后跟', level: 'N4', category: '身体'},
+    {jp: 'つま先', kana: 'つまさき', en: 'toe / tiptoe', cn: '脚尖', level: 'N4', category: '身体'},
+    {jp: '太もも', kana: 'ふともも', en: 'thigh', cn: '大腿', level: 'N4', category: '身体'},
+    {jp: 'ふくらはぎ', kana: 'ふくらはぎ', en: 'calf (of leg)', cn: '小腿肚', level: 'N4', category: '身体'},
+    {jp: '腰', kana: 'こし', en: 'hip / lower back', cn: '腰', level: 'N4', category: '身体'},
+    {jp: '尻', kana: 'しり', en: 'buttocks', cn: '臀部', level: 'N4', category: '身体'},
+
+    // --- Internal organs / 内臓 ---
+    {jp: '心臓', kana: 'しんぞう', en: 'heart (organ)', cn: '心脏', level: 'N4', category: '身体'},
+    {jp: '血', kana: 'ち', en: 'blood', cn: '血液', level: 'N4', category: '身体'},
+    {jp: '骨', kana: 'ほね', en: 'bone', cn: '骨头', level: 'N4', category: '身体'},
+    {jp: '肌', kana: 'はだ', en: 'skin', cn: '皮肤', level: 'N4', category: '身体'},
+    {jp: '脳', kana: 'のう', en: 'brain', cn: '大脑', level: 'N4', category: '身体'},
+    {jp: '胃', kana: 'い', en: 'stomach (organ)', cn: '胃', level: 'N4', category: '身体'},
+    {jp: '肺', kana: 'はい', en: 'lung', cn: '肺', level: 'N4', category: '身体'},
+    {jp: '肝臓', kana: 'かんぞう', en: 'liver', cn: '肝脏', level: 'N4', category: '身体'},
+    {jp: '腎臓', kana: 'じんぞう', en: 'kidney', cn: '肾脏', level: 'N4', category: '身体'},
+    {jp: '腸', kana: 'ちょう', en: 'intestines', cn: '肠', level: 'N4', category: '身体'},
+    {jp: '筋肉', kana: 'きんにく', en: 'muscle', cn: '肌肉', level: 'N4', category: '身体'},
+    {jp: '関節', kana: 'かんせつ', en: 'joint', cn: '关节', level: 'N4', category: '身体'},
+    {jp: '血管', kana: 'けっかん', en: 'blood vessel', cn: '血管', level: 'N4', category: '身体'},
+    {jp: '神経', kana: 'しんけい', en: 'nerve', cn: '神经', level: 'N4', category: '身体'},
+
+    // --- Whole body ---
+    {jp: '体', kana: 'からだ', en: 'body', cn: '身体', level: 'N5', category: '身体'},
+
+    // --- Sensations / verbs ---
+    {jp: '痛い', kana: 'いたい', en: 'painful / it hurts', cn: '疼', level: 'N5', category: '身体'},
+    {jp: '痒い', kana: 'かゆい', en: 'itchy', cn: '痒', level: 'N4', category: '身体'},
+    {jp: 'だるい', kana: 'だるい', en: 'sluggish / fatigued', cn: '浑身无力', level: 'N4', category: '身体'},
+    {jp: '吐く', kana: 'はく', en: 'to vomit', cn: '呕吐', level: 'N4', category: '身体'},
+    {jp: '咳', kana: 'せき', en: 'cough', cn: '咳嗽', level: 'N4', category: '身体'},
+    {jp: '熱', kana: 'ねつ', en: 'fever / heat', cn: '发烧', level: 'N5', category: '身体'},
+    {jp: '怪我', kana: 'けが', en: 'injury', cn: '受伤', level: 'N4', category: '身体'},
+];

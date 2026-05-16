@@ -1,0 +1,871 @@
+/* ============================================
+   日本語学習 — Sumi-e Aesthetic
+   Inspired by ink wash painting & traditional Japanese colors
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+
+:root {
+    /* Traditional Japanese Colors (日本伝統色) */
+    --sumi: #2B2B2B;            /* 墨 — ink black */
+    --kurotobi: #1A1A2E;        /* 黒鳶 — dark kite */
+    --ai-iro: #264653;          /* 藍色 — indigo */
+    --asagi: #2A9D8F;           /* 浅葱 — light blue-green */
+    --sakura: #F2C6C2;          /* 桜 — cherry blossom */
+    --tokiwa: #3A7D5C;          /* 常磐 — evergreen */
+    --kitsune: #C4956A;         /* 狐 — fox gold */
+    --kinari: #F5F0E8;          /* 生成り — natural undyed */
+    --shiro-neri: #FAF8F5;      /* 白練 — refined white */
+    --fuji-murasaki: #8B7EC8;   /* 藤紫 — wisteria */
+    --beni-aka: #C84B6A;        /* 紅赤 — rouge red */
+    --tetsu: #4A6670;           /* 鉄 — iron blue */
+
+    /* Functional */
+    --primary: var(--beni-aka);
+    --secondary: var(--tetsu);
+    --accent: var(--kitsune);
+    --accent2: var(--asagi);
+    --bg: var(--kinari);
+    --bg-alt: var(--shiro-neri);
+    --card-bg: #FFFFFF;
+    --text: var(--kurotobi);
+    --text-light: #7A8594;
+    --border: #DDD5C8;
+    --shadow: 0 2px 8px rgba(26, 26, 46, 0.06);
+    --shadow-hover: 0 8px 24px rgba(26, 26, 46, 0.1);
+    --radius: 10px;
+    --radius-sm: 6px;
+
+    --success: var(--tokiwa);
+    --error: var(--beni-aka);
+
+    /* Level Colors */
+    --n5: #3A7D5C;
+    --n4: #264653;
+    --n3: #C4956A;
+    --n2: #C84B6A;
+    --n1: #8B7EC8;
+
+    /* Fonts */
+    --font-display: 'Noto Serif JP', 'Yu Mincho', serif;
+    --font-body: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+}
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   HEADER — Ink wash gradient
+   ============================================ */
+header {
+    background: linear-gradient(160deg, #1A1A2E 0%, #264653 40%, #2A9D8F 80%, #3A7D5C 100%);
+    color: white;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ink wash texture overlay */
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, rgba(255,255,255,0.04) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Decorative brush stroke */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: var(--bg);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 20'%3E%3Cpath d='M0 20 Q150 0 300 12 Q450 24 600 8 Q750 -4 900 14 Q1050 28 1200 6 L1200 20 Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 20'%3E%3Cpath d='M0 20 Q150 0 300 12 Q450 24 600 8 Q750 -4 900 14 Q1050 28 1200 6 L1200 20 Z' fill='black'/%3E%3C/svg%3E");
+    mask-size: cover;
+    -webkit-mask-size: cover;
+}
+
+h1 {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 0.3rem;
+    position: relative;
+    letter-spacing: 0.15em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    opacity: 0.7;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+/* ============================================
+   NAVIGATION — Ink brush style
+   ============================================ */
+nav {
+    display: flex;
+    justify-content: center;
+    background: var(--kurotobi);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(26, 26, 46, 0.3);
+}
+
+.nav-tab {
+    padding: 1rem 2.2rem;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    position: relative;
+    user-select: none;
+}
+
+.nav-tab:hover {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.04);
+}
+
+.nav-tab.active {
+    color: white;
+}
+
+/* Ink brush underline indicator */
+.nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--kitsune), transparent);
+    border-radius: 3px 3px 0 0;
+}
+
+/* ============================================
+   MAIN LAYOUT
+   ============================================ */
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.panel {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   SEARCH & CONTROLS — Washi card style
+   ============================================ */
+.controls-area {
+    background: var(--card-bg);
+    padding: 1.2rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+/* Decorative corner mark */
+.controls-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-top: 2px solid var(--asagi);
+    border-left: 2px solid var(--asagi);
+    border-radius: var(--radius) 0 0 0;
+    opacity: 0.6;
+}
+
+.search-input {
+    flex: 2;
+    min-width: 200px;
+    padding: 0.7rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    outline: none;
+    background: var(--kinari);
+    color: var(--text);
+}
+
+.search-input::placeholder {
+    color: #A0A0A0;
+}
+
+.search-input:focus {
+    border-color: var(--asagi);
+    box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.12);
+    background: white;
+}
+
+.filter-select {
+    flex: 1;
+    min-width: 140px;
+    padding: 0.7rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--kinari);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.3s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A8594' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 2rem;
+}
+
+.filter-select:focus {
+    border-color: var(--asagi);
+    outline: none;
+}
+
+/* ============================================
+   WORD CARDS — Refined grid
+   ============================================ */
+.list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 0.75rem;
+}
+
+.word-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1rem 0.8rem;
+    box-shadow: var(--shadow);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow: hidden;
+}
+
+/* Top accent line on hover */
+.word-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--asagi), var(--fuji-murasaki));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.word-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: transparent;
+}
+
+.word-card:hover::before {
+    transform: scaleX(1);
+}
+
+.word-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.3rem;
+}
+
+.word-card .item-audio {
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--tetsu);
+    opacity: 0;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    padding: 2px;
+}
+
+.word-card:hover .item-audio { opacity: 0.6; }
+.word-card:hover .item-audio:hover { opacity: 1; transform: scale(1.15); }
+.word-card .item-audio:active { transform: scale(0.9); }
+
+.word-card .item-main {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.45rem;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+.word-card .item-sub {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+}
+
+.word-card .item-desc {
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.1rem;
+}
+
+.word-card .item-tag {
+    font-size: 0.65rem;
+    padding: 1px 7px;
+    border-radius: 3px;
+    color: white;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-top: 0.3rem;
+    letter-spacing: 0.5px;
+}
+
+/* Level colors */
+.word-card .item-tag[data-level="N5"] { background: var(--n5); }
+.word-card .item-tag[data-level="N4"] { background: var(--n4); }
+.word-card .item-tag[data-level="N3"] { background: var(--n3); }
+.word-card .item-tag[data-level="N2"] { background: var(--n2); }
+.word-card .item-tag[data-level="N1"] { background: var(--n1); }
+
+/* ============================================
+   SENTENCE LIST — Elegant list
+   ============================================ */
+.sentence-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.sentence-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card-bg);
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.sentence-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 3px;
+    background: var(--asagi);
+    border-radius: 0 2px 2px 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.sentence-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.sentence-item:hover::before {
+    opacity: 1;
+}
+
+.sentence-item .item-audio {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--tetsu);
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: all 0.2s;
+}
+
+.sentence-item:hover .item-audio { opacity: 1; }
+
+.sentence-item .item-main {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.sentence-item .item-sub {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   GOJUON TABLE — Calligraphy grid
+   ============================================ */
+.gojuon-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: linear-gradient(135deg, rgba(194, 175, 154, 0.08), rgba(194, 175, 154, 0.03));
+    padding: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.gojuon-row {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.kana-cell {
+    flex: 1;
+    min-width: 52px;
+    height: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(26, 26, 46, 0.06);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.kana-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--kitsune), var(--beni-aka));
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.kana-cell:hover {
+    color: white;
+    transform: scale(1.12) translateY(-2px);
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(196, 149, 106, 0.3);
+    border-color: transparent;
+}
+
+.kana-cell:hover::after {
+    opacity: 1;
+}
+
+.kana-cell:hover span {
+    position: relative;
+    z-index: 1;
+}
+
+.kana-cell.empty {
+    background: transparent;
+    cursor: default;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.kana-sub {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+.kana-cell:hover .kana-sub {
+    color: rgba(255,255,255,0.85);
+}
+
+/* Speaker icons */
+.speaker-icon {
+    font-size: 0.85rem;
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 1;
+}
+
+.kana-cell:hover .speaker-icon { opacity: 0.6; }
+
+.vowel-speaker {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.kana-cell:hover .vowel-speaker { opacity: 0.7; }
+.vowel-speaker:hover {
+    opacity: 1 !important;
+    transform: scale(1.2);
+}
+
+@keyframes pulse-glow {
+    0% { transform: scale(1); filter: drop-shadow(0 0 2px var(--kitsune)); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 8px var(--kitsune)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--kitsune)); }
+}
+
+.vowel-speaker.playing {
+    animation: pulse-glow 0.4s ease-in-out;
+    color: var(--kitsune);
+    opacity: 1;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(15deg) scale(1.1); }
+    75% { transform: rotate(-15deg) scale(1.1); }
+}
+
+.playing {
+    border-color: var(--kitsune) !important;
+    box-shadow: 0 0 0 2px rgba(196, 149, 106, 0.2) !important;
+}
+
+.playing .speaker-icon {
+    animation: wiggle 0.5s ease-in-out infinite;
+    opacity: 1;
+    color: var(--kitsune);
+}
+
+/* ============================================
+   QUIZ — Elegant card
+   ============================================ */
+.quiz-card {
+    background: var(--card-bg);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.quiz-card h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+/* Quiz mode buttons */
+.quiz-card .btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border: 1.5px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-card .btn::after {
+    content: '\2192';
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.2s;
+    color: var(--asagi);
+    font-size: 1.1rem;
+}
+
+.quiz-card .btn:hover {
+    border-color: var(--asagi);
+    background: rgba(42, 157, 143, 0.04);
+    transform: translateX(4px);
+    box-shadow: none;
+}
+
+.quiz-card .btn:hover::after {
+    opacity: 1;
+    right: 1rem;
+}
+
+.quiz-card .btn.btn-accent {
+    background: linear-gradient(135deg, var(--asagi), var(--tokiwa));
+    color: white;
+    border-color: transparent;
+    margin-top: 0.5rem;
+}
+
+.quiz-card .btn.btn-accent:hover {
+    background: linear-gradient(135deg, var(--tokiwa), var(--ai-iro));
+}
+
+.quiz-card .btn.btn-accent::after {
+    color: rgba(255,255,255,0.6);
+}
+
+/* Quiz question */
+.quiz-question {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin: 2rem 0;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+/* Quiz options */
+.option-btn {
+    padding: 1rem;
+    border: 1.5px solid var(--border);
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: var(--asagi);
+    background: rgba(42, 157, 143, 0.04);
+    transform: translateY(-1px);
+}
+
+.option-btn.correct {
+    background: rgba(58, 125, 92, 0.1);
+    border-color: var(--tokiwa);
+    color: var(--tokiwa);
+    font-weight: 700;
+}
+
+.option-btn.wrong {
+    background: rgba(200, 75, 106, 0.08);
+    border-color: var(--beni-aka);
+    color: var(--beni-aka);
+}
+
+/* ============================================
+   BUTTONS — Refined
+   ============================================ */
+.btn {
+    padding: 0.65rem 1.4rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background: var(--card-bg);
+    color: var(--text);
+    letter-spacing: 0.3px;
+}
+
+.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+    background: var(--beni-aka);
+    color: white;
+    border-color: var(--beni-aka);
+}
+.btn-primary:hover { background: #b3405c; }
+
+.btn-secondary {
+    background: var(--tetsu);
+    color: white;
+    border-color: var(--tetsu);
+}
+.btn-secondary:hover { background: #3d5a63; }
+
+.btn-accent {
+    background: var(--asagi);
+    color: white;
+    border-color: var(--asagi);
+}
+.btn-accent:hover { background: #238b7e; }
+
+/* ============================================
+   PAGINATION — Minimal
+   ============================================ */
+.pagination-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.page-info {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+}
+
+.page-btns {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.page-btn {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 0.35rem;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    color: var(--text);
+    transition: all 0.15s;
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: var(--asagi);
+    color: var(--asagi);
+}
+
+.page-btn.active {
+    background: var(--asagi);
+    color: white;
+    border-color: var(--asagi);
+}
+
+.page-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.page-dots {
+    padding: 0 0.3rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+/* ============================================
+   SCROLLBAR — Minimal
+   ============================================ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(26, 26, 46, 0.15);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(26, 26, 46, 0.25);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .list-container {
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    }
+    .controls-area { flex-direction: column; }
+    h1 { font-size: 2rem; }
+    .nav-tab { padding: 0.85rem 1.2rem; font-size: 0.9rem; }
+    .word-card .item-main { font-size: 1.25rem; }
+    .quiz-question { font-size: 2.5rem; }
+    .container { padding: 0 1rem; }
+}
+
+@media (max-width: 480px) {
+    .list-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    .nav-tab { padding: 0.7rem 0.7rem; font-size: 0.8rem; letter-spacing: 0; }
+    .word-card { padding: 0.75rem; }
+    .sentence-item { padding: 0.8rem; }
+    h1 { font-size: 1.7rem; letter-spacing: 0.08em; }
+    .quiz-card { padding: 1.5rem 1rem; }
+    .quiz-question { font-size: 2rem; }
+}

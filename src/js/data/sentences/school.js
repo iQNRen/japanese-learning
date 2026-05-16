@@ -1,0 +1,17 @@
+export default [
+    {jp: '日本語を勉強しています。', kana: 'にほんごをべんきょうしています', en: 'I am studying Japanese.', cn: '我正在学习日语。', level: 'N5', category: '学校'},
+    {jp: '宿題は出しましたか？', kana: 'しゅくだいはだしましたか', en: 'Did you turn in the homework?', cn: '作业交了吗？', level: 'N5', category: '学校'},
+    {jp: '試験はいつですか？', kana: 'しけんはいつですか', en: 'When is the exam?', cn: '考试是什么时候？', level: 'N5', category: '学校'},
+    {jp: '先生、質問があります。', kana: 'せんせい、しつもんがあります', en: 'Teacher, I have a question.', cn: '老师，我有问题。', level: 'N5', category: '学校'},
+    {jp: '授業は何時に始まりますか？', kana: 'じゅぎょうはなんじにはじまりますか', en: 'What time does class start?', cn: '课几点开始？', level: 'N5', category: '学校'},
+    {jp: '図書館で勉強します。', kana: 'としょかんでべんきょうします', en: 'I study at the library.', cn: '我在图书馆学习。', level: 'N5', category: '学校'},
+    {jp: '大学に通っています。', kana: 'だいがくにかよっています', en: 'I attend university.', cn: '我在上大学。', level: 'N4', category: '学校'},
+    {jp: '専門は何ですか？', kana: 'せんもんはなんですか', en: 'What is your major?', cn: '你的专业是什么？', level: 'N4', category: '学校'},
+    {jp: '成績が良かったです。', kana: 'せいせきがよかったです', en: 'My grades were good.', cn: '成绩很好。', level: 'N4', category: '学校'},
+    {jp: '卒業したら何をしますか？', kana: 'そつぎょうしたらなにをしますか', en: 'What will you do after graduation?', cn: '毕业后做什么？', level: 'N4', category: '学校'},
+    {jp: '留学したいです。', kana: 'りゅうがくしたいです', en: 'I want to study abroad.', cn: '我想留学。', level: 'N4', category: '学校'},
+    {jp: '奨学金をもらいました。', kana: 'しょうがくきんをもらいました', en: 'I received a scholarship.', cn: '我获得了奖学金。', level: 'N4', category: '学校'},
+    {jp: '論文を書いています。', kana: 'ろんぶんをかいています', en: 'I\'m writing a thesis.', cn: '我在写论文。', level: 'N3', category: '学校'},
+    {jp: '研究の発表をしました。', kana: 'けんきゅうのはっぴょうをしました', en: 'I gave a research presentation.', cn: '做了研究发表。', level: 'N3', category: '学校'},
+    {jp: '新しい知識を学ぶことは楽しいです。', kana: 'あたらしいちしきをまなぶことはたのしいです', en: 'Learning new knowledge is fun.', cn: '学习新知识很开心。', level: 'N3', category: '学校'},
+];
