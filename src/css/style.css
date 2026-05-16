@@ -518,18 +518,17 @@ nav {
     white-space: nowrap;
 }
 
-.select-icon {
-    width: 16px;
-    height: 16px;
+.filter-icon {
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
     color: var(--kitsune);
-    opacity: 0.7;
+    opacity: 0.6;
     transition: color 0.3s, opacity 0.3s;
+    align-self: center;
 }
 
-.custom-select-trigger:hover .select-icon,
-.custom-select.open .select-icon {
-    color: var(--asagi);
+.controls-area:hover .filter-icon {
     opacity: 1;
 }
 
